@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken')
 
 const userMiddleware = (req,res,next) => {
     const token = req.cookies.auth
+    console.log(token)
+    
         
     if(!token) {
         return res.status(401).json({ message: "Unauthorized" })
