@@ -35,7 +35,9 @@ router.post('/signup', async (req,res) => {
         return res.status(500).json({message: 'Internal server error'})
     }
     const token = jwt.sign({ email },process.env.JWT_KEY)
-    res.cookie('auth',token)
+    res.cookie('auth',token,{
+      sameSite: "none"
+    })
     return res.status(201).json({
         message: "User Created Succesfully"
     })
@@ -56,9 +58,11 @@ router.post('/signin', async (req,res) => {
     const isValidPassword = bcrypt.compareSync(password,user.password)
     if(isValidPassword) {
         const token = jwt.sign({ email },process.env.JWT_KEY)       
-        res.cookie('auth',token)
+        res.cookie('auth',token,{
+          sameSite: "none"
+        })
         return res.status(200).json({
-            message : "Signed in Successfully"
+          message : "Signed in Successfully"
         })
     }
     else {
