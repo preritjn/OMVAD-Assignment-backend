@@ -75,7 +75,7 @@ router.post('/signout', (req,res) => {
 router.post('/verify', (req,res) => {
     const { token } = req.body
     try {
-      const response = jwt.verify(token,process.env.JWT_KEY)
+      jwt.verify(token,process.env.JWT_KEY)
       return res.status(200).send(true)
     }
     catch ( err ) {
