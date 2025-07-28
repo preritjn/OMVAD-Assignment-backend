@@ -72,7 +72,7 @@ router.post('/signout', (req,res) => {
 })
 
 router.post('/verify', (req,res) => {
-    const { token } = req.body
+    const token = req.cookies.auth
     try {
       jwt.verify(token,process.env.JWT_KEY)
       return res.status(200).send(true)
