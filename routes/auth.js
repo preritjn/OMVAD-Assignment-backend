@@ -36,7 +36,7 @@ router.post('/signup', async (req,res) => {
     }
     const token = jwt.sign({ email },process.env.JWT_KEY)
     res.cookie('auth',token,{
-      sameSite: 'None',
+      sameSite: 'lax',
       httpOnly: true,
       secure: true
     })
@@ -61,7 +61,7 @@ router.post('/signin', async (req,res) => {
     if(isValidPassword) {
       const token = jwt.sign({ email },process.env.JWT_KEY)
       res.cookie('auth',token,{
-        sameSite: 'None',
+        sameSite: 'lax',
         httpOnly: true,
         secure: true
       })
