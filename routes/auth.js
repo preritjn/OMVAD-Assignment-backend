@@ -37,8 +37,7 @@ router.post('/signup', async (req,res) => {
     const token = jwt.sign({ email },process.env.JWT_KEY)
     res.cookie('auth',token,{
       secure: true,
-      sameSite: "none",
-      httpOnly: true
+      sameSite: "none"
     })
     return res.status(201).json({
         message: "User Created Succesfully"
@@ -62,8 +61,7 @@ router.post('/signin', async (req,res) => {
         const token = jwt.sign({ email },process.env.JWT_KEY)       
         res.cookie('auth',token,{
           secure: true,
-          sameSite: "none",
-          httpOnly: true
+          sameSite: "none"
         })
         return res.status(200).json({
           message : "Signed in Successfully"
