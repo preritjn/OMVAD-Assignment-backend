@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-export default function userMiddleware(req,res,next) {
+function userMiddleware(req,res,next) {
     const token = req.cookies.auth
     console.log(token)   
         
@@ -16,3 +16,5 @@ export default function userMiddleware(req,res,next) {
         return res.status(401).json({ message: "Unauthorized" })
     }
 }
+
+module.exports = userMiddleware
