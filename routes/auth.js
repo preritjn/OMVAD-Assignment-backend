@@ -35,20 +35,7 @@ router.post('/signup', async (req,res) => {
         return res.status(500).json({message: 'Internal server error'})
     }
     const token = jwt.sign({ email },process.env.JWT_KEY)
-    // Allow requests from any origin
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  // Allow specific HTTP methods
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-
-  // Allow specific headers to be sent in the request
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  // Allow credentials (e.g., cookies, authentication) to be included in requests
-  res.setHeader('Access-Control-Allow-Credentials', true);
     res.cookie('auth',token,{
-      secure: true,
-      sameSite: "none",
       httpOnly: true
     })
     return res.status(201).json({
@@ -70,21 +57,8 @@ router.post('/signin', async (req,res) => {
     }
     const isValidPassword = bcrypt.compareSync(password,user.password)
     if(isValidPassword) {
-        const token = jwt.sign({ email },process.env.JWT_KEY)       
-        // Allow requests from any origin
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  // Allow specific HTTP methods
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-
-  // Allow specific headers to be sent in the request
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  // Allow credentials (e.g., cookies, authentication) to be included in requests
-  res.setHeader('Access-Control-Allow-Credentials', true);
+        const token = jwt.sign({ email },process.env.JWT_KEY)
         res.cookie('auth',token,{
-          secure: true,
-          sameSite: "none",
           httpOnly: true
         })
         return res.status(200).json({
