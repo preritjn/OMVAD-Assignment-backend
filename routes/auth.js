@@ -9,8 +9,8 @@ const saltRounds = 10
 const router = Router()
 
 const userDataSchema = zod.object({
-    email: zod.string().email(),
-    password: zod.string().min(4, { message: 'Password must be at least 4 characters long' })
+  email: zod.string().email(),
+  password: zod.string().min(4, { message: 'Password must be at least 4 characters long' })
 })
 
 router.post('/signup', async (req,res) => {
@@ -36,8 +36,7 @@ router.post('/signup', async (req,res) => {
     }
     const token = jwt.sign({ email },process.env.JWT_KEY)
     res.cookie('auth',token,{
-      sameSite: 'lax',
-      httpOnly: true,
+      sameSite: 'None',
       secure: true
     })
     return res.status(201).json({
@@ -61,8 +60,7 @@ router.post('/signin', async (req,res) => {
     if(isValidPassword) {
       const token = jwt.sign({ email },process.env.JWT_KEY)
       res.cookie('auth',token,{
-        sameSite: 'lax',
-        httpOnly: true,
+        sameSite: 'None',
         secure: true
       })
       return res.status(200).json({
